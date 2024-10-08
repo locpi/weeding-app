@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Ajouter un invité</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="addGuest()" class="guest-form">
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input matInput [(ngModel)]="newGuest.name" name="name" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="newGuest.email" name="email" required>
+      </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="newGuest.isAttending" name="isAttending">
+        Présent
+      </mat-checkbox>
+
+      <mat-form-field>
+        <mat-label>Accompagnants</mat-label>
+        <input matInput type="number" [(ngModel)]="newGuest.plusOnes" name="plusOnes">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Ajouter</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="mt-4">
+  <mat-card-header>
+    <mat-card-title>Liste des invités</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let guest"> {{guest.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let guest"> {{guest.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="isAttending">
+        <th mat-header-cell *matHeaderCellDef> Présent </th>
+        <td mat-cell *matCellDef="let guest">
+          <mat-checkbox [(ngModel)]="guest.isAttending" (change)="updateGuest(guest)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="plusOnes">
+        <th mat-header-cell *matHeaderCellDef> Accompagnants </th>
+        <td mat-cell *matCellDef="let guest">
+          <input matInput type="number" [(ngModel)]="guest.plusOnes" (change)="updateGuest(guest)">
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let guest">
+          <button mat-icon-button color="warn" (click)="deleteGuest(guest)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

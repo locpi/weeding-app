@@ -1,0 +1,11 @@
+<app-navbar (menuToggle)="toggleSidenav()"></app-navbar>
+
+<mat-sidenav-container>
+  <mat-sidenav [opened]="sidenavOpened" mode="side">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet/>
+  </mat-sidenav-content>
+</mat-sidenav-container>
