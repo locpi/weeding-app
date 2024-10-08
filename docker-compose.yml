@@ -40,7 +40,7 @@ services:
       context: ./weeding-front
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "8001:80"
     depends_on:
       - backend
 
