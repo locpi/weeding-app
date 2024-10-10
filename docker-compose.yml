@@ -3,13 +3,15 @@ version: '3.8'
 services:
   nginx:
     image: nginx
-    container_name: nginx
     ports:
       - "8032:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     networks:
       - weeding-network
+    depends_on:
+      frontend:
+        condition: service_healthy
   postgres:
     image: postgres:13-alpine
     environment:
@@ -49,7 +51,8 @@ services:
     networks:
       - weeding-network
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
 
 volumes:
   postgres_data:
