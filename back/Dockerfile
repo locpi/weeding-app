@@ -23,7 +23,7 @@ WORKDIR /app
 
 # Copier le JAR construit depuis l'étape de build
 COPY --from=build /app/target/*.jar app.jar
-
+RUN apt update && apt install -y curl
 # Exposer le port 8080
 EXPOSE 8080
 
