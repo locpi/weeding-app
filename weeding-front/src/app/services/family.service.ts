@@ -9,13 +9,14 @@ import {
 	Page,
 	UpdateFamilyDto
 } from "../guest/guest-list/guest.model";
+import {environment} from "../../environments/environment";
 
 
 @Injectable({
 	providedIn: 'root'
 })
 export class FamilyService {
-	private apiUrl = 'http://localhost:7485/api';
+	private apiUrl = environment.apiURL+'/api';
 
 	constructor(private http: HttpClient) {}
 

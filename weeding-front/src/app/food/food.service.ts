@@ -2,12 +2,13 @@ import {CateringItem} from "./food.model";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CateringService {
-  private apiUrl = 'http://localhost:7485/api/catering';
+  private apiUrl = environment.apiURL+'/api/catering';
 
   constructor(private http: HttpClient) { }
 

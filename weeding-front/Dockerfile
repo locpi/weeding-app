@@ -21,7 +21,7 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copier les fichiers construits depuis l'étape de build
-COPY --from=build /app /usr/share/nginx/html
+COPY --from=build /app/dist/weeding-front/browser /usr/share/nginx/html
 
 EXPOSE 80
 

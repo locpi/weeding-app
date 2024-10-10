@@ -23,7 +23,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=weddinguser
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD:-complexpassword123}
     ports:
-      - "8080:8080"
+      - "8052:8080"
     depends_on:
       postgres:
         condition: service_healthy
@@ -36,7 +36,7 @@ services:
   frontend:
     image: loicpincon/weeding-front:latest
     ports:
-      - "80:80"
+      - "8032:80"
     depends_on:
       - backend
 
