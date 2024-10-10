@@ -10,7 +10,7 @@ services:
     networks:
       - weeding-network
     depends_on:
-      frontend:
+      backend:
         condition: service_healthy
   postgres:
     image: postgres:13-alpine
@@ -50,9 +50,6 @@ services:
     image: loicpincon/weeding-front:latest
     networks:
       - weeding-network
-    depends_on:
-      backend:
-        condition: service_healthy
 
 volumes:
   postgres_data:
