@@ -19,9 +19,13 @@ jobs:
 
 
       # Build the Docker image
-      - name: Build Docker image
+      - name: Build Docker image BACK
         run: |
-          docker build -t my-docker-image:latest ./back
+          docker build -t weeding-back:latest ./back
+      # Build the Docker image
+      - name: Build Docker image FRONT
+        run: |
+          docker build -t weeding-front:latest ./weeding-front
 
       # (Optional) Push the image to Docker Hub
       - name: Push Docker image
