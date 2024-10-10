@@ -1,0 +1,30 @@
+<div class="max-w-4xl mx-auto p-6">
+	<h2 class="text-3xl font-bold mb-6">Membres de la Famille</h2>
+</div>
+	<div class="grid grid-cols-4 gap-1">
+			<mat-card *ngFor="let member of $members()" >
+				<mat-card-header>
+					<div mat-card-avatar class="bg-gray-300 rounded-full"></div>
+					<mat-card-title>{{ member.firstName }} {{ member.lastName }}</mat-card-title>
+					<mat-card-subtitle>{{ member.email }}</mat-card-subtitle>
+				</mat-card-header>
+
+				<mat-card-content>
+					<p><strong>Téléphone: </strong>{{ member.phone }}</p>
+					<p><strong>Type de Membre: </strong>{{ member.guestType }}</p>
+					<p><strong>Témoin: </strong>{{ member.witnessType }}</p>
+					<p><strong>Âge: </strong>{{ member.age }}</p>
+					<p>
+						<strong>Confirmé: </strong>
+						<span *ngIf="member.isConfirmed" class="text-green-600">Oui</span>
+						<span *ngIf="!member.isConfirmed" class="text-red-600">Non</span>
+					</p>
+				</mat-card-content>
+
+				<mat-card-actions>
+					<button mat-button color="primary">Voir Détails</button>
+					<button mat-button color="accent">Modifier</button>
+				</mat-card-actions>
+			</mat-card>
+
+	</div>

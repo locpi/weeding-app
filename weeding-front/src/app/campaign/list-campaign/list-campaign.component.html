@@ -1,0 +1,10 @@
+<h2 class="text-3xl font-bold mt-8">Existing Campaigns</h2>
+<div class="mt-4">
+	<ul>
+		<li *ngFor="let campaign of campaigns | async" class="mb-4 p-4 border rounded">
+			<h3 class="font-bold">{{ campaign.title }}</h3>
+			<p><strong>Start Date: </strong>{{ campaign.startDate | date }}</p>
+			<p><strong>Content: </strong>{{ campaign.content }}</p>
+		</li>
+	</ul>
+</div>

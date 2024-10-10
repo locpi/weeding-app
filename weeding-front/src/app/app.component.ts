@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from "@angular/material/sidenav";
 import {SidenavComponent} from "./sidenav/sidenav.component";
-import {GuestListComponent} from "./guest-list/guest-list.component";
+import {GuestListComponent} from "./guest/guest-list/guest-list.component";
 
 @Component({
   selector: 'app-root',

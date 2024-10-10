@@ -21,7 +21,10 @@ import {RouterLink} from "@angular/router";
 })
 export class SidenavComponent {
   menuItems = [
+    { icon: 'people', text: 'Dashboard',link:'' },
     { icon: 'people', text: 'Liste des invités',link:'guest' },
     { icon: 'bar_chart', text: 'Traiteur',link: 'food' },
+    { icon: 'bar_chart', text: 'Communications',link: 'campaign' },
+
   ];
 }

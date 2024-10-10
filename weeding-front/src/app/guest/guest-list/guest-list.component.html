@@ -1,0 +1,48 @@
+<div class="max-w-5xl mx-auto p-4">
+	<h1 class="text-3xl font-bold mb-4">Family List</h1>
+
+	<table mat-table [dataSource]="families" class="min-w-full divide-y divide-gray-200">
+		<!-- Name Column -->
+		<ng-container matColumnDef="name">
+			<th mat-header-cell *matHeaderCellDef class="px-4 py-2 text-left text-sm font-medium text-gray-500">Family Name</th>
+			<td mat-cell *matCellDef="let family" class="px-4 py-2">{{ family.name }}</td>
+		</ng-container>
+
+		<!-- Address Column -->
+		<ng-container matColumnDef="address">
+			<th mat-header-cell *matHeaderCellDef class="px-4 py-2 text-left text-sm font-medium text-gray-500">Address</th>
+			<td mat-cell *matCellDef="let family" class="px-4 py-2">{{ family.address }}</td>
+		</ng-container>
+
+		<!-- Postal Code Column -->
+		<ng-container matColumnDef="postalCode">
+			<th mat-header-cell *matHeaderCellDef class="px-4 py-2 text-left text-sm font-medium text-gray-500">Postal Code</th>
+			<td mat-cell *matCellDef="let family" class="px-4 py-2">{{ family.postalCode }}</td>
+		</ng-container>
+
+		<!-- City Column -->
+		<ng-container matColumnDef="city">
+			<th mat-header-cell *matHeaderCellDef class="px-4 py-2 text-left text-sm font-medium text-gray-500">City</th>
+			<td mat-cell *matCellDef="let family" class="px-4 py-2">{{ family.city }}</td>
+		</ng-container>
+
+		<!-- Actions Column -->
+		<ng-container matColumnDef="actions">
+			<th mat-header-cell *matHeaderCellDef class="px-4 py-2 text-left text-sm font-medium text-gray-500">Actions</th>
+			<td mat-cell *matCellDef="let family" class="px-4 py-2">
+				<button mat-button color="primary" [routerLink]="family.id" >View</button>
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="['name', 'address', 'postalCode', 'city', 'actions']"></tr>
+		<tr mat-row *matRowDef="let row; columns: ['name', 'address', 'postalCode', 'city', 'actions'];"></tr>
+	</table>
+
+	<!-- Paginator -->
+	<mat-paginator
+			[length]="totalFamilies"
+			[pageSize]="pageSize"
+			[pageSizeOptions]="[5, 10, 20]"
+			(page)="onPageChange($event)">
+	</mat-paginator>
+</div>

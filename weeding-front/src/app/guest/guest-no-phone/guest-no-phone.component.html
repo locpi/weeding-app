@@ -1,0 +1,32 @@
+<mat-card class="example-card" appearance="outlined">
+	<mat-card-header>
+		<mat-card-title-group>
+			<mat-card-title>		Numero de telephone manquant</mat-card-title>
+			<img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+		</mat-card-title-group>
+	</mat-card-header>
+	<mat-card-content>
+		<div class="grid grid-cols-1">
+			<table >
+				<thead>
+				<th>Nom</th>
+				<th>Téléphone</th>
+				</thead>
+				<tbody>
+				<tr *ngFor="let g of guest">
+					<td>
+						{{ g.firstName }} {{g.lastName}}
+					</td>
+					<td>
+						<input [(ngModel)]="g.phone"  type="text">
+						<button (click)="updateGuest(g)" ><mat-icon fontIcon="check"></mat-icon></button>
+					</td>
+				</tr>
+
+				</tbody>
+			</table>
+					</div>
+	</mat-card-content>
+</mat-card>
+
+

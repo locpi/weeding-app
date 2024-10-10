@@ -7,7 +7,7 @@ import {Injectable} from "@angular/core";
   providedIn: 'root'
 })
 export class CateringService {
-  private apiUrl = 'http://localhost:8080/api/catering';
+  private apiUrl = 'http://localhost:7485/api/catering';
 
   constructor(private http: HttpClient) { }
 

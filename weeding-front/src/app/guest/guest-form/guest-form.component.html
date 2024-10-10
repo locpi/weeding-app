@@ -1,0 +1,104 @@
+<form [formGroup]="familyForm" (ngSubmit)="onSubmit()" class="max-w-2xl mx-auto p-4">
+	<div class="mb-6">
+		<h2 class="text-2xl font-bold mb-4">Family Information</h2>
+		<div class="grid grid-cols-1 gap-4">
+			<div>
+				<mat-form-field appearance="outline" class="w-full">
+					<mat-label>Family Name</mat-label>
+					<input matInput formControlName="familyName" type="text">
+				</mat-form-field>
+			</div>
+			<div>
+				<mat-form-field appearance="outline" class="w-full">
+					<mat-label>Address</mat-label>
+					<input matInput formControlName="address" type="text">
+				</mat-form-field>
+			</div>
+			<div class="grid grid-cols-2 gap-4">
+				<div>
+					<mat-form-field appearance="outline" class="w-full">
+						<mat-label>Postal Code</mat-label>
+						<input matInput formControlName="postalCode" type="text">
+					</mat-form-field>
+				</div>
+				<div>
+					<mat-form-field appearance="outline" class="w-full">
+						<mat-label>City</mat-label>
+						<input matInput formControlName="city" type="text">
+					</mat-form-field>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mb-6">
+		<h3 class="text-xl font-bold mb-4">Adults</h3>
+		<div formArrayName="adults">
+			<div *ngFor="let adult of adults.controls; let i=index" [formGroupName]="i" class="mb-4 p-4 border rounded">
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<mat-form-field appearance="outline" class="w-full">
+							<mat-label>First Name</mat-label>
+							<input matInput formControlName="firstName" type="text">
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-form-field appearance="outline" class="w-full">
+							<mat-label>Last Name</mat-label>
+							<input matInput formControlName="lastName" type="text">
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-form-field appearance="outline" class="w-full">
+							<mat-label>Phone</mat-label>
+							<input matInput formControlName="phone" type="tel">
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-form-field appearance="outline" class="w-full">
+							<mat-label>Witness Type</mat-label>
+							<mat-select formControlName="witnessType">
+								<mat-option [value]="WitnessType.NONE">None</mat-option>
+								<mat-option [value]="WitnessType.BRIDE">Bride</mat-option>
+								<mat-option [value]="WitnessType.GROOM">Groom</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="mt-2">
+					<mat-checkbox formControlName="isConfirmed">Confirmed</mat-checkbox>
+				</div>
+				<button mat-button color="warn" type="button" (click)="removeAdult(i)" class="mt-2">Remove</button>
+			</div>
+			<button mat-button color="primary" type="button" (click)="addAdult()" class="mt-2">Add Adult</button>
+		</div>
+	</div>
+
+	<div class="mb-6">
+		<h3 class="text-xl font-bold mb-4">Children</h3>
+		<div formArrayName="children">
+			<div *ngFor="let child of children.controls; let i=index" [formGroupName]="i" class="mb-4 p-4 border rounded">
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<mat-form-field appearance="outline" class="w-full">
+							<mat-label>First Name</mat-label>
+							<input matInput formControlName="firstName" type="text">
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-form-field appearance="outline" class="w-full">
+							<mat-label>Age</mat-label>
+							<input matInput formControlName="age" type="number">
+						</mat-form-field>
+					</div>
+				</div>
+				<button mat-button color="warn" type="button" (click)="removeChild(i)" class="mt-2">Remove</button>
+			</div>
+			<button mat-button color="primary" type="button" (click)="addChild()" class="mt-2">Add Child</button>
+		</div>
+	</div>
+
+	<button mat-raised-button color="primary" type="submit" class="w-full">
+		Submit Family
+	</button>
+</form>

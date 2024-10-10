@@ -1,7 +1,7 @@
 package fr.loicpincon.rest;
 
 import fr.loicpincon.dao.CateringItem;
-import fr.loicpincon.dao.CateringRepository;
+import fr.loicpincon.dao.repo.CateringRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,30 +1,48 @@
 package fr.loicpincon.dao;
 
 
+import fr.loicpincon.model.FamilyType;
+import fr.loicpincon.model.GuestType;
+import fr.loicpincon.model.WitnessType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import lombok.Data;
+
+import java.util.List;
 
 @Entity
+@Data
 public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String email;
-    private boolean isAttending;
-    private int plusOnes;
 
-    // Getters and setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public boolean isAttending() { return isAttending; }
-    public void setAttending(boolean attending) { isAttending = attending; }
-    public int getPlusOnes() { return plusOnes; }
-    public void setPlusOnes(int plusOnes) { this.plusOnes = plusOnes; }
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phone;
+
+    @Enumerated(EnumType.STRING)
+    private GuestType guestType;
+
+    @Enumerated(EnumType.STRING)
+    private WitnessType witnessType;
+
+    @Enumerated(EnumType.STRING)
+    private FamilyType familyType;
+
+    private Integer age;
+    private boolean isConfirmed;
+
+
+
+
 }

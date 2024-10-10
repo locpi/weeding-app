@@ -1,0 +1,13 @@
+<div class="max-w-lg mx-auto p-4">
+	<h1 class="text-2xl font-bold mb-4">Upload CSV File</h1>
+
+	<input type="file" (change)="onFileSelected($event)" class="mb-4"/>
+
+	<button
+			(click)="uploadFile()"
+			class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+		Upload
+	</button>
+</div>
+<app-guest-form/>
+<app-guest-list/>
