@@ -32,6 +32,7 @@ private final FoodService foodService;
 
 	@Transactional
 	public void importGuestsFromCsv(Reader reader) throws Exception {
+		this.familyRepository.deleteAll();
 		CSVReader csvReader = new CSVReaderBuilder(reader)
 				.withSkipLines(1) // Skip header
 				.build();
