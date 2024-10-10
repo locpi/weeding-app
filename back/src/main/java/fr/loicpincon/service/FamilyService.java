@@ -111,11 +111,11 @@ public class FamilyService {
 
 	public GuestStatisticsDto getGuestStatistics() {
 		GuestStatisticsDto stats = new GuestStatisticsDto();
-		stats.setTotalGuests(guestRepository.count());
+		stats.setTotalGuests((int)guestRepository.count());
 		stats.setTotalAdults(guestRepository.countByGuestType(GuestType.ADULT));
 		stats.setTotalChildren(guestRepository.countByGuestType(GuestType.CHILD));
 		stats.setConfirmedGuests(guestRepository.countByIsConfirmedTrue());
-		stats.setTotalFamilies(familyRepository.countTotalFamilies());
+		stats.setTotalFamilies((int)familyRepository.countTotalFamilies());
 		return stats;
 	}
 

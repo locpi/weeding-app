@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class GuestStatisticsDto {
-	private long totalGuests;
-	private long totalAdults;
-	private long totalChildren;
-	private long confirmedGuests;
-	private long totalFamilies;
+	private int totalGuests;
+	private int totalAdults;
+	private int totalChildren;
+	private int confirmedGuests;
+	private int totalFamilies;
 }

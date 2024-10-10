@@ -21,12 +21,13 @@ public class GuestImportService {
 
 	private final FamilyRepository familyRepository;
 	private final GuestRepository guestRepository;
-
+private final FoodService foodService;
 	record GuestProcess(String name,String lastname,String adresse,String tel,String leaveWith,int childNumber,String id,String type){}
 
-	public GuestImportService(FamilyRepository familyRepository, GuestRepository guestRepository) {
+	public GuestImportService(FamilyRepository familyRepository, GuestRepository guestRepository, final FoodService foodService) {
 		this.familyRepository = familyRepository;
 		this.guestRepository = guestRepository;
+		this.foodService = foodService;
 	}
 
 	@Transactional
@@ -81,7 +82,7 @@ public class GuestImportService {
 
 
 		csvReader.close();
-
+		this.foodService.sync();
 	}
 
 	private Guest mapFRom(GuestProcess g){

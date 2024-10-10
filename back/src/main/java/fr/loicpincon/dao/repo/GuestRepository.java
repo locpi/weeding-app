@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface GuestRepository extends JpaRepository<Guest, Long> {
-	long countByGuestType(GuestType type);
-	long countByIsConfirmedTrue();
+	int countByGuestType(GuestType type);
+	int countByIsConfirmedTrue();
 
 	List<Guest> findAllByPhoneIsNull();
 }

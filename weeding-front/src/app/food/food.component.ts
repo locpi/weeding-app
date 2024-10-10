@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {CateringItem} from "./food.model";
 import {CateringService} from "./food.service";
 import {
@@ -18,6 +18,7 @@ import {FormsModule} from "@angular/forms";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {NgForOf} from "@angular/common";
+import {FamilyService} from "../services/family.service";
 
 @Component({
   selector: 'app-food',
@@ -52,6 +53,9 @@ import {NgForOf} from "@angular/common";
   styleUrl: './food.component.css'
 })
 export class FoodComponent {
+
+  familyService = inject(FamilyService);
+
   displayedColumns: string[] = ['name', 'description', 'category', 'adultPrice', 'childPrice', 'adultQuantity', 'childQuantity', 'total', 'actions'];
   dataSource = new MatTableDataSource<CateringItem>();
   categories = ['Entrée', 'Plat principal', 'Dessert', 'Boisson'];
