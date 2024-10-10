@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    environment: DOCKER
     runs-on: ubuntu-latest
 
     steps:
