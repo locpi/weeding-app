@@ -4,19 +4,29 @@ import {GuestViewComponent} from "./view/guest-view/guest-view.component";
 import {FamilyDetailsComponent} from "./guest/family-details/family-details.component";
 import {CampaignViewComponent} from "./view/campaign-view/campaign-view.component";
 import {DashboardViewComponent} from "./view/dashboard-view/dashboard-view.component";
+import {authGuard} from "./guards/auth.guard";
 
 
 export const routes: Routes = [
   {
-    path:'',
-    component: DashboardViewComponent
+    path:'dashboard',
+    component: DashboardViewComponent,
+    canActivate: [authGuard]
   },
     {
     path:'food',
-    component: FoodComponent
-  },
-  {path:'guest',component:GuestViewComponent},
-  {path:'campaign',component:CampaignViewComponent},
+    component: FoodComponent,
+      canActivate: [authGuard]
 
-  {path:'guest/:id',component:FamilyDetailsComponent}
+    },
+
+  {path:'guest',component:GuestViewComponent,    canActivate: [authGuard]
+  },
+  {path:'campaign',component:CampaignViewComponent,    canActivate: [authGuard]
+  },
+
+  {path:'guest/:id',component:FamilyDetailsComponent,    canActivate: [authGuard]
+  },
+  {path:'**',
+  redirectTo:'dashboard'}
 ];

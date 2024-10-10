@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/catering")
-@CrossOrigin(origins = "http://localhost:4200")
 public class CateringController {
     @Autowired
     private CateringRepository cateringRepository;
