@@ -28,7 +28,7 @@ jobs:
       - name: Build and push BACK
         uses: docker/build-push-action@v4
         with:
-          context: /back
+          context: back
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/weeding-back:latest
           platforms: linux/arm64/v8
@@ -36,7 +36,7 @@ jobs:
       - name: Build and push FRONT
         uses: docker/build-push-action@v4
         with:
-          context: /weeding-front
+          context: weeding-front
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/weeding-front:latest
           platforms: linux/arm64/v8
