@@ -7,4 +7,6 @@ export interface CateringItem {
   adultQuantity: number;
   childQuantity: number;
   category: string;
+  total:number
+  type:string;
 }

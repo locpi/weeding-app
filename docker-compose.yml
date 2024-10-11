@@ -17,9 +17,11 @@ services:
     environment:
       POSTGRES_DB: weddingdb
       POSTGRES_USER: weddinguser
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-complexpassword123}
+      POSTGRES_PASSWORD: -complexpassword123
     networks:
       - weeding-network
+    ports:
+      - 7410:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

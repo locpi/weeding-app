@@ -5,6 +5,7 @@ import {FamilyDetailsComponent} from "./guest/family-details/family-details.comp
 import {CampaignViewComponent} from "./view/campaign-view/campaign-view.component";
 import {DashboardViewComponent} from "./view/dashboard-view/dashboard-view.component";
 import {authGuard} from "./guards/auth.guard";
+import {FinancerListComponent} from "./financer/financer-list/financer-list.component";
 
 
 export const routes: Routes = [
@@ -25,6 +26,8 @@ export const routes: Routes = [
   {path:'campaign',component:CampaignViewComponent,    canActivate: [authGuard]
   },
 
+  {path:'financer',component:FinancerListComponent,    canActivate: [authGuard]
+  },
   {path:'guest/:id',component:FamilyDetailsComponent,    canActivate: [authGuard]
   },
   {path:'**',

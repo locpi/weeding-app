@@ -24,7 +24,7 @@ public class GuestImportService {
 	private final FamilyRepository familyRepository;
 	private final GuestRepository guestRepository;
 private final FoodService foodService;
-	record GuestProcess(String name,String lastname,String adresse,String tel,String leaveWith,int childNumber,String id,String type){}
+	record GuestProcess(String code,String name,String lastname,String adresse,String tel,String leaveWith,int childNumber,String id,String type){}
 
 	public GuestImportService(FamilyRepository familyRepository, GuestRepository guestRepository, final FoodService foodService) {
 		this.familyRepository = familyRepository;
@@ -52,7 +52,7 @@ private final FoodService foodService;
 				 s = Integer.parseInt(line[8]);
 			}
 			guestProcessList.add(new GuestProcess(
-					line[1],line[0],line[9],line[12],line[15],s,line[14],line[6]
+					line[2],line[1],line[0],line[9],line[12],line[15],s,line[14],line[6]
 			));
 		}
 
@@ -79,6 +79,7 @@ private final FoodService foodService;
 					guest.setFirstName("Enfant");
 					guest.setLastName((i+1)+"");
 					guest.setGuestType(GuestType.CHILD);
+					guest.setCode(item.code);
 					family.getMembers().add(guest);
 					log.info("ajout de 1 enfant pour {} {}",item.lastname,item.name);
 				}
@@ -101,6 +102,7 @@ private final FoodService foodService;
 		f.setLastName(g.lastname);
 		f.setGuestType(GuestType.ADULT);
 		f.setFirstName(g.name);
+		f.setCode(g.code);
 		return f;
 	}
 

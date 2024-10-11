@@ -58,7 +58,7 @@ export class FoodComponent {
 
   displayedColumns: string[] = ['name', 'description', 'category', 'adultPrice', 'childPrice', 'adultQuantity', 'childQuantity', 'total', 'actions'];
   dataSource = new MatTableDataSource<CateringItem>();
-  categories = ['Entrée', 'Plat principal', 'Dessert', 'Boisson'];
+  categories = ['Entrée', 'Plat principal', 'Dessert', 'Boisson','FIXE'];
 
   newItem: CateringItem = {
     name: '',
@@ -67,7 +67,9 @@ export class FoodComponent {
     childPrice: 0,
     adultQuantity: 0,
     childQuantity: 0,
-    category: ''
+    category: '',
+    total:0,
+    type:'FOOD'
   };
 
   constructor(private cateringService: CateringService) { }
@@ -108,12 +110,12 @@ export class FoodComponent {
   }
 
   calculateTotal(item: CateringItem): number {
-    return (item.adultPrice * item.adultQuantity) + (item.childPrice * item.childQuantity);
+    return item.total;
   }
 
   calculateGrandTotal(): number {
     return this.dataSource.data.reduce((total, item) =>
-      total + this.calculateTotal(item), 0);
+      total + item.total, 0);
   }
 
   resetNewItem(): void {
@@ -124,7 +126,9 @@ export class FoodComponent {
       childPrice: 0,
       adultQuantity: 0,
       childQuantity: 0,
-      category: ''
+      category: '',
+      total:0,
+      type:'FOOD'
     };
   }
 }

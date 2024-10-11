@@ -1,11 +1,16 @@
 package fr.loicpincon.dao;
 
+import fr.loicpincon.model.FinancerType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 
 @Entity
+@Data
 public class CateringItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,23 +21,16 @@ public class CateringItem {
     private double childPrice;
     private int adultQuantity;
     private int childQuantity;
-    private String category; // ex: "Entrée", "Plat", "Dessert"
+    private String category;
 
-    // Getters and setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-    public double getAdultPrice() { return adultPrice; }
-    public void setAdultPrice(double adultPrice) { this.adultPrice = adultPrice; }
-    public double getChildPrice() { return childPrice; }
-    public void setChildPrice(double childPrice) { this.childPrice = childPrice; }
-    public int getAdultQuantity() { return adultQuantity; }
-    public void setAdultQuantity(int adultQuantity) { this.adultQuantity = adultQuantity; }
-    public int getChildQuantity() { return childQuantity; }
-    public void setChildQuantity(int childQuantity) { this.childQuantity = childQuantity; }
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
+    @Enumerated(EnumType.STRING)
+    private FinancerType type;// ex: "Entrée", "Plat", "Dessert"
+
+    public double getTotal(){
+        if(category.equals("FIXE")){
+            return adultPrice;
+        }
+        return adultPrice*adultQuantity+childPrice*childQuantity;
+    }
+
 }
