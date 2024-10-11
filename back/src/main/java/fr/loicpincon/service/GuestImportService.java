@@ -6,6 +6,7 @@ import fr.loicpincon.dao.repo.FamilyRepository;
 import fr.loicpincon.dao.repo.GuestRepository;
 import fr.loicpincon.model.GuestType;
 import fr.loicpincon.model.WitnessType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.opencsv.CSVReader;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class GuestImportService {
 
 	private final FamilyRepository familyRepository;
@@ -46,6 +48,7 @@ private final FoodService foodService;
 		while ((line = csvReader.readNext()) != null) {
 			int s=0;
 			if(!line[8].equalsIgnoreCase("")) {
+				log.info(line[8]);
 				 s = Integer.parseInt(line[8]);
 			}
 			guestProcessList.add(new GuestProcess(
@@ -65,13 +68,19 @@ private final FoodService foodService;
 				family.getMembers().add(mapFRom(item));
 				family.getMembers().addAll(leaveWith);
 
-				for(int i=0;i<item.childNumber;i++){
+				final int sum = guestProcessList.stream()
+						.filter(f -> f.leaveWith.equals(item.id))
+						.mapToInt(i -> i.childNumber)
+						.sum();
+
+				for(int i=0;i<item.childNumber +sum;i++){
 					final Guest guest = new Guest();
 					guest.setAge(12);
 					guest.setFirstName("Enfant");
 					guest.setLastName((i+1)+"");
 					guest.setGuestType(GuestType.CHILD);
 					family.getMembers().add(guest);
+					log.info("ajout de 1 enfant pour {} {}",item.lastname,item.name);
 				}
 
 				familyRepository.save(family);
