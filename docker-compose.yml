@@ -1,6 +1,11 @@
-version: '3.8'
-
 services:
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1045:1025
+      - 8045:8025
+    profiles:
+      - dev
   nginx:
     image: nginx
     ports:
@@ -25,7 +30,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U weddinguser -d weddingdb"]
+      test: [ "CMD-SHELL", "pg_isready -U weddinguser -d weddingdb" ]
       interval: 5s
       timeout: 1s
       retries: 10
