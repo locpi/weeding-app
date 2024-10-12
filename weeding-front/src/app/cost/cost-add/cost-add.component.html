@@ -15,14 +15,14 @@
 		<div class="grid grid-cols-2 gap-4">
 			<mat-form-field appearance="fill">
 				<mat-label>Adult Price</mat-label>
-				<input formControlName="adultPrice" matInput required type="number">
+				<input formControlName="adultPrice" matInput type="number">
 				<mat-error *ngIf="form.get('adultPrice')?.hasError('required')">Adult Price is required</mat-error>
 				<mat-error *ngIf="form.get('adultPrice')?.hasError('min')">Must be positive</mat-error>
 			</mat-form-field>
 
 			<mat-form-field appearance="fill">
 				<mat-label>Child Price</mat-label>
-				<input formControlName="childPrice" matInput required type="number">
+				<input formControlName="childPrice" matInput type="number">
 				<mat-error *ngIf="form.get('childPrice')?.hasError('required')">Child Price is required</mat-error>
 				<mat-error *ngIf="form.get('childPrice')?.hasError('min')">Must be positive</mat-error>
 			</mat-form-field>

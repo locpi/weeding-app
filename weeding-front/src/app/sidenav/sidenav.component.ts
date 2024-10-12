@@ -23,11 +23,10 @@ export class SidenavComponent {
 	menuItems = [
 		{icon: 'people', text: 'Dashboard', link: ''},
 		{icon: 'people', text: 'Liste des invités', link: 'guest'},
-		{icon: 'bar_chart', text: 'Traiteur', link: 'food'},
+		{icon: 'bar_chart', text: 'Simulateur Traiteur', link: 'food'},
 		{icon: 'bar_chart', text: 'Communications', link: 'campaign'},
-		{icon: 'bar_chart', text: 'Financeur', link: 'financer'},
 		{icon: 'peoples', text: 'Administration', link: 'organization'},
-		{icon: 'money', text: 'Cout', link: 'cost'},
+		{icon: 'money', text: 'Dépenses', link: 'cost'},
 
 	];
 }

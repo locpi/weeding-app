@@ -6,14 +6,23 @@ import fr.loicpincon.service.PriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/financers")
 @RequiredArgsConstructor
 public class FinancerController {
 	private final FinancerService financerService;
+
 	private final PriceService priceService;
 
 	@GetMapping
@@ -27,7 +36,7 @@ public class FinancerController {
 	}
 
 	@GetMapping("/price-stats")
-	public ResponseEntity<List<FinancerService.PricePerFinancer>> resultBy() {
+	public ResponseEntity<List<PriceService.Result>> resultBy() {
 		return ResponseEntity.ok(financerService.priceBy());
 	}
 
@@ -45,7 +54,7 @@ public class FinancerController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Financer> updateFinancer(
 			@PathVariable Long id,
-			 @RequestBody Financer financerDTO) {
+			@RequestBody Financer financerDTO) {
 		return ResponseEntity.ok(financerService.updateFinancer(id, financerDTO));
 	}
 

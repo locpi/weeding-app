@@ -25,4 +25,6 @@ public class PeopleGroup {
 	@ManyToMany
 	private List<OrganizerPeople> peoples;
 
+	private transient int numberOfPeople = 10;
+
 }

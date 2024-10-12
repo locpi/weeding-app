@@ -5,26 +5,15 @@
 			 class="bg-white rounded-lg shadow-lg p-6 transition-transform hover:scale-105">
 			<div class="flex justify-between items-start mb-4">
 				<div>
-					<h2 class="text-xl font-bold">{{ item.financer.label }}</h2>
-					<p class="text-gray-500">Code: {{ item.financer.code }}</p>
+					<h2 class="text-xl font-bold">{{ item.people.label }}</h2>
+					<p class="text-gray-500">Code: {{ item.people.id }}</p>
 				</div>
 				<span class="text-2xl font-bold text-blue-600">
-					{{ item.price | number:'1.2-2' }}€
+					{{ item.priceFood | number:'1.2-2' }}€
 				</span>
 			</div>
 
-			<div class="mb-4">
-				<div class="flex flex-wrap gap-2">
-					<span *ngFor="let type of item.financer.financerTypeList"
-						  class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-						{{ type }}
-					</span>
-				</div>
-			</div>
-
-			<div class="text-sm text-gray-600">
-				Population: {{ item.financer.population.join(', ') }}
-			</div>
+			
 		</div>
 	</div>
 </div>

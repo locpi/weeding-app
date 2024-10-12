@@ -13,23 +13,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FinancerService {
 	private final FinancerRepository financerRepository;
+
 	private final PriceService priceService;
 
 	@Transactional(readOnly = true)
 	public List<Financer> getAllFinancers() {
-		return  financerRepository.findAll();
+		return financerRepository.findAll();
 	}
 
-	public record PricePerFinancer(Financer financer,Double price){}
+	public List<PriceService.Result> priceBy() {
+		return priceService.process();
 
-	public List<PricePerFinancer> priceBy(){
-		final List<Financer> all = financerRepository.findAll();
-		final List<PriceService.Result> process = priceService.process();
-		return process.stream().map(
-				f->new PricePerFinancer(all.stream().filter(c->c.getCode().equals(f.code())).findFirst().orElseThrow(), f.priceFood())
-		).toList();
 	}
-
 
 	@Transactional(readOnly = true)
 	public Financer getFinancerById(Long id) {
@@ -43,7 +38,7 @@ public class FinancerService {
 			throw new RuntimeException("Financer already exists with code: " + financer.getCode());
 		}
 		financer.setId(null);
-			return financerRepository.save(financer);
+		return financerRepository.save(financer);
 	}
 
 	@Transactional
@@ -69,5 +64,8 @@ public class FinancerService {
 			throw new RuntimeException("Financer not found with id: " + id);
 		}
 		financerRepository.deleteById(id);
+	}
+
+	public record PricePerFinancer(Financer financer, Double price) {
 	}
 }
