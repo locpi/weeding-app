@@ -1,5 +1,6 @@
 package fr.loicpincon.service;
 
+import fr.loicpincon.dao.repo.GuestRepository;
 import fr.loicpincon.dao.v2.CostLine;
 import fr.loicpincon.dao.v2.CostRepartition;
 import fr.loicpincon.dao.v2.OrganizerPeople;
@@ -9,23 +10,29 @@ import fr.loicpincon.model.CostPayment;
 import fr.loicpincon.model.CostType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockitoExtension.class)
 class CostCalculatorTest {
 
-	private final CostCalculator costCalculator = new CostCalculator();
+	OrganizerPeople LP, LT;
 
-	PeopleGroup A = buildPeopleGroup(1L, 95);
+	PeopleGroup A, B;
 
-	PeopleGroup B = buildPeopleGroup(2L, 5);
+	@InjectMocks
+	private CostCalculator costCalculator;
 
-	OrganizerPeople LP = buildORrganizer(1L);
-
-	OrganizerPeople LT = buildORrganizer(2L);
+	@Mock
+	private GuestRepository guestRepository;
 
 	private CostLine testObject;
 
@@ -46,6 +53,12 @@ class CostCalculatorTest {
 
 		List<CostRepartition> repartitions = new ArrayList<>();
 		testObject.setRepartition(repartitions);
+
+		LP = buildORrganizer(1L);
+
+		LT = buildORrganizer(2L);
+		A = buildPeopleGroup(1L, 95);
+		B = buildPeopleGroup(2L, 5);
 	}
 
 
@@ -113,7 +126,10 @@ class CostCalculatorTest {
 	private PeopleGroup buildPeopleGroup(Long id, int size) {
 		PeopleGroup peopleGroup = new PeopleGroup();
 		peopleGroup.setId(id);
+		peopleGroup.setLabel(id.toString());
 		peopleGroup.setNumberOfPeople(size);
+		Mockito.lenient().when(guestRepository.numberByCode(id.toString())).thenReturn(size);
+
 		return peopleGroup;
 	}
 }
