@@ -1,12 +1,12 @@
 import {APP_INITIALIZER, ApplicationConfig, Provider} from '@angular/core';
 import {provideRouter} from '@angular/router';
 
-import {routes} from './app.routes';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {provideHttpClient} from "@angular/common/http";
 import {provideOAuthClient} from "angular-oauth2-oidc";
-import {AuthGoogleService} from "./guards/auth-google.service";
+import {AuthGoogleService} from "./layout/connected/guards/auth-google.service";
 import {provideAnimations} from "@angular/platform-browser/animations";
+import {globalRoutes} from "./app.routes";
 
 // Provider for Keycloak Initialization
 const keycloakInitializerProvider: Provider = {
@@ -23,5 +23,5 @@ function initializeKeycloak(keycloak: AuthGoogleService) {
 }
 
 export const appConfig: ApplicationConfig = {
-	providers: [provideAnimations(), provideRouter(routes), provideAnimationsAsync(), provideHttpClient(), provideOAuthClient(), keycloakInitializerProvider],
+	providers: [provideAnimations(), provideRouter(globalRoutes), provideAnimationsAsync(), provideHttpClient(), provideOAuthClient(), keycloakInitializerProvider],
 };
