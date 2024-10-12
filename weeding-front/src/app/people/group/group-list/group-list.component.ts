@@ -10,8 +10,8 @@ import {
 } from "@angular/material/card";
 import {NgForOf} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
-import {OrganizerNewComponent} from "../../organizer/organizer-new/organizer-new.component";
 import {GroupPeople, GroupPeopleService} from "../group-people.service";
+import {GroupAddComponent} from "../group-add/group-add.component";
 
 @Component({
 	selector: 'app-group-list',
@@ -52,7 +52,7 @@ export class GroupListComponent {
 	}
 
 	openDialog(person?: GroupPeople) {
-		const dialogRef = this.dialog.open(OrganizerNewComponent, {
+		const dialogRef = this.dialog.open(GroupAddComponent, {
 			width: '250px',
 			data: person || {},
 		});
