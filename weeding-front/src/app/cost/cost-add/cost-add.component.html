@@ -1,0 +1,128 @@
+<h2 mat-dialog-title>{{ data.id ? 'Edit' : 'Create' }} Cost Line</h2>
+<mat-dialog-content class="mat-typography">
+	<form [formGroup]="form" class="flex flex-col gap-4">
+		<mat-form-field appearance="fill">
+			<mat-label>Name</mat-label>
+			<input formControlName="name" matInput required>
+			<mat-error *ngIf="form.get('name')?.hasError('required')">Name is required</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Description</mat-label>
+			<textarea formControlName="description" matInput rows="3"></textarea>
+		</mat-form-field>
+
+		<div class="grid grid-cols-2 gap-4">
+			<mat-form-field appearance="fill">
+				<mat-label>Adult Price</mat-label>
+				<input formControlName="adultPrice" matInput required type="number">
+				<mat-error *ngIf="form.get('adultPrice')?.hasError('required')">Adult Price is required</mat-error>
+				<mat-error *ngIf="form.get('adultPrice')?.hasError('min')">Must be positive</mat-error>
+			</mat-form-field>
+
+			<mat-form-field appearance="fill">
+				<mat-label>Child Price</mat-label>
+				<input formControlName="childPrice" matInput required type="number">
+				<mat-error *ngIf="form.get('childPrice')?.hasError('required')">Child Price is required</mat-error>
+				<mat-error *ngIf="form.get('childPrice')?.hasError('min')">Must be positive</mat-error>
+			</mat-form-field>
+		</div>
+
+
+		<mat-form-field appearance="fill">
+			<mat-label>Fixed Price</mat-label>
+			<input formControlName="priceFixe" matInput type="number">
+			<mat-error *ngIf="form.get('priceFixe')?.hasError('min')">Must be positive</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Sub Name</mat-label>
+			<input formControlName="subName" matInput>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Type</mat-label>
+			<mat-select formControlName="type" required>
+				<mat-option *ngFor="let obj of costtype" [value]="obj">{{ obj }}</mat-option>
+
+			</mat-select>
+			<mat-error *ngIf="form.get('type')?.hasError('required')">Type is required</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Object</mat-label>
+			<mat-select formControlName="object" required>
+				<mat-option *ngFor="let obj of costObjectKeys" [value]="obj">{{ obj }}</mat-option>
+			</mat-select>
+			<mat-error *ngIf="form.get('object')?.hasError('required')">Object is required</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Payment Type</mat-label>
+			<mat-select formControlName="paymentType" required>
+				<mat-option *ngFor="let payment of costPaymentKeys" [value]="payment">{{ payment }}</mat-option>
+			</mat-select>
+			<mat-error *ngIf="form.get('paymentType')?.hasError('required')">Payment Type is required</mat-error>
+		</mat-form-field>
+		<mat-divider/>
+
+		<div *ngFor="let type of $organizer|async ">
+			<mat-checkbox (change)="updateOrga(type,$event)"
+						  class="example-margin">{{ type.label }}
+
+			</mat-checkbox>
+			<mat-form-field class="w-full">
+				<mat-label>Population</mat-label>
+				<mat-select (selectionChange)="setPeople(type,$event)" multiple required>
+					<mat-option *ngFor="let type of $peoplegroup|async " [value]="type">
+						{{ type.label }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+
+		<mat-divider/>
+
+		<form (ngSubmit)="addTimeLine()" [formGroup]="timelineItemForm">
+			<mat-form-field appearance="fill">
+				<mat-label>Montant</mat-label>
+				<input formControlName="total" matInput type="number">
+			</mat-form-field>
+			<mat-form-field appearance="fill">
+				<mat-label>date de paiement</mat-label>
+				<input formControlName="dueDate" matInput type="date">
+			</mat-form-field>
+			<button type="submit">Add</button>
+
+		</form>
+		<div *ngIf="data.timeLineList?.length" class="w-full">
+
+			<h3 class="text-lg font-semibold mb-2">Timelines</h3>
+			<table class="w-full">
+				<thead>
+				<tr>
+					<th>Due date</th>
+					<th>Total</th>
+					<th>Paid</th>
+				</tr>
+
+				</thead>
+				<tbody>
+				<tr *ngFor="let timeline of form.controls['timeLineList'].value">
+					<td mat-line>Due: {{ timeline.dueDate | date }}</td>
+					<td mat-line>Total: {{ timeline.total | currency }}</td>
+					<td mat-line>Paid: {{ timeline.paid ? 'Yes' : 'No' }}</td>
+				</tr>
+				</tbody>
+			</table>
+
+
+		</div>
+
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button (click)="onCancel()" mat-button>Cancel</button>
+	<button (click)="onSubmit()" [disabled]="form.invalid" color="primary" mat-button>Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,21 @@
+<div class="container mx-auto p-4">
+	<h1 class="text-2xl font-bold mb-4">People Group</h1>
+	<button (click)="openDialog()" class="mb-4" color="primary" mat-raised-button>
+		Add New
+	</button>
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+		<mat-card *ngFor="let person of organizerPeople" class="p-4">
+			<mat-card-header>
+				<mat-card-title>{{ person.label }}</mat-card-title>
+				<mat-card-subtitle>ID: {{ person.id }}</mat-card-subtitle>
+			</mat-card-header>
+			<mat-card-content>
+				<p>UUID: {{ person.uuid }}</p>
+			</mat-card-content>
+			<mat-card-actions>
+				<button (click)="openDialog(person)" color="primary" mat-button>Edit</button>
+				<button (click)="deletePerson(person)" color="warn" mat-button>Delete</button>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+</div>

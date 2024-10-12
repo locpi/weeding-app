@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{ data.id ? 'Edit' : 'Add' }} Organizer People</h1>
+<div mat-dialog-content>
+	<mat-form-field appearance="fill" class="w-full">
+		<mat-label>Label</mat-label>
+		<input [(ngModel)]="data.label" matInput required>
+	</mat-form-field>
+	<mat-form-field class="w-full">
+		<mat-label>Population</mat-label>
+		<mat-select (selectionChange)="setGroup($event)" multiple required>
+			<mat-option *ngFor="let type of $peopleGroup|async " [value]="type">
+				{{ type.label }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+</div>
+<div mat-dialog-actions>
+	<button (click)="onNoClick()" mat-button>Cancel</button>
+	<button [mat-dialog-close]="data" cdkFocusInitial mat-button>Save</button>
+</div>

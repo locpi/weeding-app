@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/catering")
-public class CateringController {
+public class CostTypeController {
     @Autowired
     private CateringRepository cateringRepository;
 
