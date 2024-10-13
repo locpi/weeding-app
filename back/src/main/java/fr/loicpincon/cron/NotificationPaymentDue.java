@@ -6,7 +6,6 @@ import fr.loicpincon.dao.v2.ActionToken;
 import fr.loicpincon.dao.v2.TimeLine;
 import fr.loicpincon.notification.NotificationService;
 import fr.loicpincon.notification.Type;
-import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +33,6 @@ public class NotificationPaymentDue {
 	private String frontUrl;
 
 	@Scheduled(cron = "0 0 10,16 * * *")
-	@PostConstruct
 	public void scan() {
 
 		final LocalDateTime begin = LocalDate.now().atStartOfDay();
