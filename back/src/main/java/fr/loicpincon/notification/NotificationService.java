@@ -1,6 +1,5 @@
 package fr.loicpincon.notification;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -45,9 +44,5 @@ public class NotificationService {
 
 	}
 
-	@PostConstruct
-	public void init() throws MessagingException {
-		this.send(Type.MAIL, "loic.pincon29@gmail.com", "Blabla", "Relance", "tu as pas paye frere");
-	}
 
 }
