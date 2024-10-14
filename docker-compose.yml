@@ -42,6 +42,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/weddingdb
       - SPRING_DATASOURCE_USERNAME=weddinguser
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD:-complexpassword123}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
     networks:
       - weeding-network
     depends_on:
